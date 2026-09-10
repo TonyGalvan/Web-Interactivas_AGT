@@ -1,0 +1,73 @@
+/* --- Estilos Tipográficos Especiales del Proyecto --- */
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+/* Forzar fuentes sans-serif nativas en componentes técnicos específicos */
+.app-navbar,
+.filter-btn,
+.movie-meta,
+.rating,
+.tag,
+.fact,
+.badge,
+.score {
+    font-family: var(--bs-font-sans-serif) !important;
+}
+
+/* --- Adaptaciones del Layout de Reseña (Inyección del JS) --- */
+.detail-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 400px;
+}
+
+.detail-copy {
+    padding: 2.5rem;
+}
+
+/* Tags personalizados inyectados desde app.js */
+.tag {
+    display: inline-block;
+    margin: 0.15rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    background-color: #e8f1ff;
+    color: #1769e0;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Contenedor estructural del Metascore */
+.metascore-bar {
+    height: 9px;
+    border-radius: 10px;
+    background-color: #e8edf2;
+    overflow: hidden;
+}
+
+/* Clases de colores lógicas sincronizadas con app.js */
+.metascore-fill {
+    height: 100%;
+    background-color: #32a852;
+    /* Verde por defecto */
+}
+
+.metascore-fill.meta-yellow {
+    background-color: #e7b83c !important;
+}
+
+.metascore-fill.meta-red {
+    background-color: #dc3545 !important;
+}
+
+/* Ajuste de escalamiento visual sobre las tarjetas de películas */
+.movie-item .card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.movie-item .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1) !important;
+}
