@@ -1,59 +1,125 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Tablero de Tareas (Laravel)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplicación web de gestión de tareas con vista tipo **tablero Kanban**, hecha con Laravel, MySQL, Bootstrap 5 y Bootstrap Icons.
 
-## About Laravel
+## Funcionalidades
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Tablero Kanban con tres columnas: **Pendiente**, **En progreso** y **Completada**.
+- Crear, ver, editar y eliminar tareas (CRUD completo).
+- Cambio rápido de estado desde la tarjeta de cada tarea.
+- Filtros por **estado** y **prioridad** (con opción "Todos").
+- Búsqueda por **texto (título) o ID**.
+- Botón para limpiar los filtros aplicados.
+- Prioridades: baja, media y alta (con colores distintos).
+- Fecha de vencimiento opcional, con aviso visual cuando una tarea está vencida.
+- Validación de formularios con mensajes en español.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tecnologías
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP 8.2 o superior
+- Laravel 11 o superior
+- MySQL
+- Blade (motor de plantillas de Laravel)
+- Bootstrap 5.3 y Bootstrap Icons 1.11 (cargados por CDN, no requieren instalación)
 
-## Learning Laravel
+## Requisitos previos
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Antes de levantar el proyecto necesitas tener instalado:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Herramienta | Versión recomendada | Para qué se usa |
+|---|---|---|
+| PHP | 8.2 o superior | Ejecutar Laravel |
+| Composer | 2.x | Instalar dependencias de PHP |
+| MySQL | 5.7+ / 8.x | Base de datos |
+| phpMyAdmin (opcional) | cualquiera | Crear la base de datos desde una interfaz |
+| Git | cualquiera | Clonar el repositorio |
 
-## Laravel Sponsors
+> Una forma sencilla de tener PHP, MySQL y phpMyAdmin juntos es instalar **XAMPP**, **Laragon** o **WAMP**.
+> No necesitas Node.js ni npm, porque Bootstrap se carga por CDN (necesitas conexión a internet para ver los estilos).
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Puedes verificar tus versiones con:
 
-### Premium Partners
+```bash
+php -v
+composer -V
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Instalación paso a paso
 
-## Contributing
+### 1. Clonar el repositorio
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+git clone <url-del-repositorio>
+cd <nombre-de-la-carpeta-del-proyecto>
+```
 
-## Code of Conduct
+### 2. Instalar las dependencias de PHP
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer install
+```
 
-## Security Vulnerabilities
+### 3. Crear el archivo de entorno
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Copia el archivo de ejemplo:
 
-## License
+```bash
+# Linux / macOS / Git Bash
+cp .env.example .env
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Windows (CMD)
+copy .env.example .env
+```
+
+### 4. Generar la clave de la aplicación
+
+```bash
+php artisan key:generate
+```
+
+### 5. Crear la base de datos
+
+1. Inicia **MySQL** desde XAMPP / Laragon / WAMP.
+2. Entra a phpMyAdmin (normalmente `http://localhost/phpmyadmin`).
+3. Ve a la pestaña **Bases de datos**, escribe un nombre (por ejemplo `tareas_app`), elige el cotejamiento `utf8mb4_unicode_ci` y haz clic en **Crear**.
+
+> Solo crea la base de datos **vacía**. Las tablas las crea Laravel con las migraciones.
+
+### 6. Configurar la conexión en el `.env`
+
+Abre el archivo `.env` y ajusta estas variables con los datos de tu MySQL:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=tareas_app
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+> `DB_DATABASE` debe coincidir con el nombre que le pusiste a la base de datos. Con XAMPP el usuario suele ser `root` sin contraseña.
+
+Si ya habías corrido el proyecto antes con otra configuración, limpia la caché:
+
+```bash
+php artisan config:clear
+```
+
+### 7. Ejecutar las migraciones
+
+```bash
+php artisan migrate
+```
+
+Esto crea las tablas del proyecto en tu base de datos, entre ellas `tasks` (con las columnas `id`, `titulo`, `descripcion`, `estado`, `prioridad`, `vencimiento`, `created_at`, `updated_at`).
+
+### 8. Levantar el servidor
+
+```bash
+php artisan serve
+```
+
+Abre en el navegador: **http://127.0.0.1:8000**
+
+La raíz del sitio redirige al tablero de tareas (`/tasks`). Deja la terminal abierta mientras uses la aplicación; para detener el servidor presiona `Ctrl + C`.
